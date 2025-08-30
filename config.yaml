@@ -3,7 +3,7 @@ proxy:
   http: http://127.0.0.1:7890
   https: http://127.0.0.1:7890
 repos:
-  - author: Fentaniao
+  - author: ruiyangzhou01
     name: Liquid
     tag:
     key: Liquid.zip
