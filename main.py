@@ -13,7 +13,7 @@ proxy:
   http: http://127.0.0.1:7890
   https: http://127.0.0.1:7890
 repos:
-  - author: Fentaniao
+  - author: ruiyangzhou01
     name: Liquid
     tag:
     key: Liquid.zip
@@ -30,7 +30,7 @@ repos:
 if __name__ == '__main__':
     print(
         'Welcome to Command Windows for Latest Release.\n'
-        'Github repo: https://github.com/Fentaniao/Latest-Release.\n'
+        'Github repo: https://github.com/ruiyangzhou01/Latest-Release.\n'
         'Enter help for more actions.'
     )
     self_check()
