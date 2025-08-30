@@ -1,13 +1,13 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/fentaniao/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
     <img alt="C++" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
 </p>
 
-[English Readme](https://github.com/Fentaniao/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/Fentaniao/Latest-Release/blob/main/README_zh.md)
+[English Readme](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_zh.md)
 
 一个用于自动部署GitHub Release的Python程序。
 
@@ -31,18 +31,18 @@
 
 只适用于Windows用户。
 
-1. 导航到[GitHub 发布页](https://github.com/Fentaniao/Latest-Release/releases)，然后点击底部的**Assets**，显示该版本中的可用文件。
+1. 导航到[GitHub 发布页](https://github.com/ruiyangzhou01/Latest-Release/releases)，然后点击底部的**Assets**，显示该版本中的可用文件。
 2. 下载**Latest Release.zip**文件并解压。
-3. 创建`config.yaml`文件，然后参照然后参照[`README.md`.](https://github.com/Fentaniao/Latest-Release/blob/main/README.md)中的用法进行配置。
+3. 创建`config.yaml`文件，然后参照然后参照[`README.md`.](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md)中的用法进行配置。
 4. 在**命令行中启动**exe文件。
 
 ### 通过Python运行脚本
 
 这种方法要求你首先将Python3安装到你的电脑上。
 
-1. 转到 [GitHub 发布页](https://github.com/Fentaniao/Latest-Release/releases)，然后点击底部的**资产**，显示该版本中的可用文件。
+1. 转到 [GitHub 发布页](https://github.com/ruiyangzhou01/Latest-Release/releases)，然后点击底部的**资产**，显示该版本中的可用文件。
 2. 下载**源代码（zip）**并解压。
-3. 创建`config.yaml`文件，然后参照[`README.md`.](https://github.com/Fentaniao/Latest-Release/blob/main/README.md)中的用法进行配置。
+3. 创建`config.yaml`文件，然后参照[`README.md`.](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md)中的用法进行配置。
 4. 安装脚本需要的软件包。
 5. 运行main.py文件。
 
@@ -72,7 +72,7 @@ proxy:
   http: http://127.0.0.1:7890
   https: http://127.0.0.1:7890
 repos:
-  - author: Fentaniao
+  - author: ruiyangzhou01
     name: Liquid
     tag: 
     key: Liquid.zip
@@ -119,4 +119,4 @@ repos:
 
 ## 许可证
 
-[GPL-3.0 License](https://github.com/Fentaniao/Latest-Release/blob/main/LICENSE) © Fentaniao
+[GPL-3.0 License](https://github.com/ruiyangzhou01/Latest-Release/blob/main/LICENSE) © ruiyangzhou01
