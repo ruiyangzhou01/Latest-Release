@@ -1,13 +1,13 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/fentaniao/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
     <img alt="C++" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
 </p>
 
-[English Readme](https://github.com/Fentaniao/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/Fentaniao/Latest-Release/blob/main/README_zh.md)
+[English Readme](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_zh.md)
 
 A powerful application to automatically deploy GitHub Release.
 
@@ -31,22 +31,22 @@ There are many ways for you to install this program.
 
 Only for Windows user.
 
-1. Turn to [GitHub Releases Page](https://github.com/Fentaniao/Latest-Release/releases), then click on **Assets** at the
+1. Turn to [GitHub Releases Page](https://github.com/ruiyangzhou01/Latest-Release/releases), then click on **Assets** at the
    bottom to show the files available in the release.
 2. Download the **Latest Release.zip** file and decompress it.
 3. Create the `config.yaml` file and then configure it by referencing to the Usage
-   in [`README.md`.](https://github.com/Fentaniao/Latest-Release/blob/main/README.md)
+   in [`README.md`.](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md)
 4. Run the exe file **though Command Window**.
 
 ### Run the script though Python
 
 This approach requires you to install Python3 into your desktop first.
 
-1. Turn to [GitHub Releases Page](https://github.com/Fentaniao/Latest-Release/releases), then click on **Assets** at the
+1. Turn to [GitHub Releases Page](https://github.com/ruiyangzhou01/Latest-Release/releases), then click on **Assets** at the
    bottom to show the files available in the release.
 2. Download the **Source code (zip)** and decompress it.
 3. Create the `config.yaml` file and then configure it by referencing to the Usage
-   in [`README.md`.](https://github.com/Fentaniao/Latest-Release/blob/main/README.md)
+   in [`README.md`.](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md)
 4. Install the package the scripts need.
 5. Run the main.py file.
 
@@ -75,7 +75,7 @@ proxy:
   http: http://127.0.0.1:7890
   https: http://127.0.0.1:7890
 repos:
-  - author: Fentaniao
+  - author: ruiyangzhou01
     name: Liquid
     tag: 
     key: Liquid.zip
@@ -116,10 +116,10 @@ repos:
 
 ## Contact
 
-Author: Fentaniao
+Author: ruiyangzhou01
 
-Email: [Fentaniao@gmail.com](mailto:Fentaniao@gmail.com)
+Email: [ruiyangzhou01@gmail.com](mailto:ruiyangzhou01@gmail.com)
 
 ## License
 
-[GPL-3.0 License](https://github.com/Fentaniao/Latest-Release/blob/main/LICENSE) © Fentaniao
+[GPL-3.0 License](https://github.com/ruiyangzhou01/Latest-Release/blob/main/LICENSE) © ruiyangzhou01
