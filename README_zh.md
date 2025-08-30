@@ -117,12 +117,6 @@ repos:
 - 基于WinUI3的GUI客户端即将问世。
 - 支持更多的功能和更多的配置方式。
 
-## 联系
-
-作者： Fentaniao
-
-邮箱： [Fentaniao@gmail.com](mailto:Fentaniao@gmail.com)
-
 ## 许可证
 
 [GPL-3.0 License](https://github.com/Fentaniao/Latest-Release/blob/main/LICENSE) © Fentaniao
