@@ -114,12 +114,6 @@ repos:
 - A client with a GUI based on WinUI3 is coming soon.
 - Support more functions and more ways of configuration.
 
-## Contact
-
-Author: ruiyangzhou01
-
-Email: [ruiyangzhou01@gmail.com](mailto:ruiyangzhou01@gmail.com)
-
 ## License
 
 [GPL-3.0 License](https://github.com/ruiyangzhou01/Latest-Release/blob/main/LICENSE) © ruiyangzhou01
