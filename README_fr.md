@@ -7,22 +7,24 @@
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
 </p>
 
-[English Readme](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_zh.md) | [Deutsche Anleitung](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_de.md) | [Guía en Español](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_es.md) | [Guide en Français](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_fr.md)
+[English Readme](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_zh.md) | [Deutsche Anleitung](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_de.md) | [Guía en Español](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_es.md) | [Guide en Français](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_fr.md) | [日本語 README](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_ja.md)
 
-Latest Release est un outil Python qui télécharge et déploie automatiquement les ressources des GitHub Releases. Il aide à garder les applications à jour avec un minimum d'efforts manuels.
+Latest Release est un outil en ligne de commande Python qui interroge les dernières GitHub Releases d'une liste de dépôts et télécharge leurs ressources sur votre machine. Il enregistre le tag de release actuel dans `config.yaml` et le met à jour après chaque téléchargement pour suivre ce qui est installé.
 
 ## Fonctionnalités
 
-### Flux de travail automatisé
+- Utilise l'API GitHub Releases pour comparer le tag enregistré avec la dernière release
+- Télécharge toutes les ressources ou une ressource unique correspondant à un mot-clé
+- Met à jour `config.yaml` avec le tag le plus récent après le téléchargement
+- Extraction optionnelle des fichiers `.gz`, `.tar`, `.zip` et `.rar`, avec nettoyage optionnel
+- Proxy HTTP/HTTPS facultatif pour les appels API et les téléchargements
+- `config.yaml` est rechargé à chaque commande afin que les modifications soient immédiates
 
-- Vérifie les nouvelles versions des GitHub Releases et télécharge les ressources
-- Prend en charge l'extraction automatique et le nettoyage des archives
-- L'installation automatique est en cours de développement
+## Prérequis
 
-### Configuration simple et réutilisable
-
-- Un seul fichier de configuration peut être réutilisé sur plusieurs exécutions
-- Prise en charge du rechargement à chaud des fichiers de configuration
+- Python 3 et pip (si vous exécutez depuis le code source)
+- `requests`, `ruamel.yaml`, `tqdm`, `pyyaml`
+- `rarfile` (uniquement requis pour extraire les archives `.rar`)
 
 ## Installation
 
@@ -34,7 +36,7 @@ Windows uniquement.
 
 1. Rendez-vous sur la [page des GitHub Releases](https://github.com/ruiyangzhou01/Latest-Release/releases) et développez **Assets** pour la dernière version.
 2. Téléchargez **Latest Release.zip** et décompressez-le.
-3. Créez un fichier `config.yaml` et configurez-le (voir [Utilisation](#utilisation)).
+3. Assurez-vous qu'un fichier `config.yaml` existe et configurez-le (voir [Utilisation](#utilisation)).
 4. Ouvrez l'invite de commandes ou PowerShell dans le dossier et lancez l'exécutable.
 
 ### Option 2 : Exécuter avec Python
@@ -49,6 +51,12 @@ Nécessite Python 3 et pip.
    pip install requests ruamel.yaml tqdm pyyaml
    ```
 
+   Optionnel pour extraire `.rar` :
+
+   ```bash
+   pip install rarfile
+   ```
+
 4. Lancez le script :
 
    ```bash
@@ -57,16 +65,16 @@ Nécessite Python 3 et pip.
 
 ## Utilisation
 
-### Commandes
+Démarrez l'exécutable ou le script. Si `config.yaml` n'existe pas, un modèle est créé dans le répertoire courant. Mettez à jour vos dépôts puis exécutez les commandes ci-dessous ; le fichier est rechargé à chaque commande.
 
-Après avoir démarré l'exécutable ou le script, saisissez `help` dans la fenêtre de commande pour afficher les commandes disponibles.
+### Commandes
 
 ```
 Command[<args>]        : Usage
-list/ls                : Lister les applications installées
-status/st              : Afficher l'état et vérifier les nouvelles versions
-update/up              : Mettre à jour toutes les applications
-config/cf              : Ouvrir le fichier de configuration pour ajouter une application ou modifier les réglages
+list/ls                : Lister les dépôts configurés et les tags enregistrés
+status/st              : Afficher l'état et comparer avec la dernière release
+update/up              : Télécharger les assets de la dernière release pour tous les dépôts
+config/cf              : Ouvrir config.yaml dans VS Code ou Notepad
 exit/et                : Quitter le shell
 ```
 
@@ -92,8 +100,8 @@ repos:
 
 | Paramètre | Type | Valeur par défaut | Description |
 | --- | --- | --- | --- |
-| `path` | `str` | - | Chemin de stockage par défaut quand `target` n'est pas défini |
-| `proxy` | `dict` | - | Paramètres de proxy HTTP/HTTPS facultatifs |
+| `path` | `str` | - | Racine de téléchargement par défaut. Quand `target` est vide, les fichiers sont stockés dans `path\\<name>\\<tag>\\` |
+| `proxy` | `dict` | - | Paramètres de proxy HTTP/HTTPS facultatifs transmis à requests |
 | `repos` | `list` | - | Liste des dépôts à gérer |
 
 #### Entrées `repos`
@@ -102,10 +110,10 @@ repos:
 | --- | --- | --- | --- |
 | `author` | `str` | - | Propriétaire du dépôt |
 | `name` | `str` | - | Nom du dépôt |
-| `tag` | `str` | - | Tag de release actuel ; laissez vide pour télécharger la dernière version |
-| `key` | `str` | `"all"` | Nom de la ressource à télécharger (`all` ou vide signifie toutes les ressources) |
-| `target` | `str` | `path` | Chemin de destination des téléchargements |
-| `setting` | `dict` | `{ decompress: auto, clean: true }` | Paramètres d'extraction |
+| `tag` | `str` | - | Tag de la dernière release téléchargée ; laissez vide pour récupérer la dernière release |
+| `key` | `str` | `"all"` | Filtre d'asset (`all` ou vide pour tout télécharger ; sinon le premier fichier contenant la clé est téléchargé) |
+| `target` | `str` | `path` | Chemin de destination des téléchargements ; laissez vide pour utiliser `path` |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | Paramètres d'extraction (appliqués à `.gz`, `.tar`, `.zip`, `.rar`) |
 
 #### Champs `setting`
 
@@ -114,10 +122,7 @@ repos:
 | `decompress` | `str` | - | `auto` extrait à côté de l'archive, une valeur non vide extrait dans ce dossier, une valeur vide extrait dans `<file_name>_files` |
 | `clean` | `bool` | `true` | Supprime l'archive après extraction |
 
-## Roadmap
-
-- Un client GUI WinUI3 est prévu.
-- D'autres fonctionnalités et options de configuration sont prévues.
+Les ressources non archivées sont conservées telles quelles, sans extraction.
 
 ## Licence
 
