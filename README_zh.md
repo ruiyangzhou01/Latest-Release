@@ -2,69 +2,77 @@
 
 <p>
     <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
-    <img alt="C++" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
+    <img alt="Python" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
 </p>
 
-[English Readme](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_zh.md)
+[English Readme](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md) | [中文自述文件](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_zh.md) | [Deutsche Anleitung](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_de.md) | [Guía en Español](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_es.md) | [Guide en Français](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README_fr.md)
 
-一个用于自动部署GitHub Release的Python程序。
+Latest Release 是一个 Python 工具，可自动下载并部署 GitHub Release 资源，帮助你以最少的手动操作保持应用更新。
 
 ## 特点
 
-### 高度自动化的流程
+### 自动化流程
 
-- 包括自动解压和自动清理功能
+- 检查 GitHub Release 新版本并下载资源
+- 支持自动解压与清理归档文件
 - 自动安装功能正在开发中
 
-### 简单而强大的配置方案
+### 简单可复用的配置
 
-- 只需要一个配置，可以一直使用
-- 支持配置文件的热更新
+- 一个配置文件可在多次运行中复用
+- 支持配置文件热更新
 
 ## 安装
 
-你有多种方法来安装这个程序。
+请选择以下任意一种方式。
 
-### 通过exe文件运行脚本
+### 方式一：运行 Windows 可执行文件
 
-只适用于Windows用户。
+仅适用于 Windows。
 
-1. 导航到[GitHub 发布页](https://github.com/ruiyangzhou01/Latest-Release/releases)，然后点击底部的**Assets**，显示该版本中的可用文件。
-2. 下载**Latest Release.zip**文件并解压。
-3. 创建`config.yaml`文件，然后参照然后参照[`README.md`.](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md)中的用法进行配置。
-4. 在**命令行中启动**exe文件。
+1. 访问 [GitHub Releases 页面](https://github.com/ruiyangzhou01/Latest-Release/releases)，展开最新版本的 **Assets**。
+2. 下载 **Latest Release.zip** 并解压。
+3. 创建 `config.yaml` 文件并进行配置（见 [使用说明](#使用)）。
+4. 在该文件夹中打开命令提示符或 PowerShell，然后运行可执行文件。
 
-### 通过Python运行脚本
+### 方式二：使用 Python 运行
 
-这种方法要求你首先将Python3安装到你的电脑上。
+需要 Python 3 和 pip。
 
-1. 转到 [GitHub 发布页](https://github.com/ruiyangzhou01/Latest-Release/releases)，然后点击底部的**资产**，显示该版本中的可用文件。
-2. 下载**源代码（zip）**并解压。
-3. 创建`config.yaml`文件，然后参照[`README.md`.](https://github.com/ruiyangzhou01/Latest-Release/blob/main/README.md)中的用法进行配置。
-4. 安装脚本需要的软件包。
-5. 运行main.py文件。
+1. 访问 [GitHub Releases 页面](https://github.com/ruiyangzhou01/Latest-Release/releases) 并下载 **Source code (zip)**。
+2. 解压后创建 `config.yaml` 文件（见 [使用说明](#使用)）。
+3. 安装依赖：
 
-## 用法
+   ```bash
+   pip install requests ruamel.yaml tqdm pyyaml
+   ```
+
+4. 运行脚本：
+
+   ```bash
+   python main.py
+   ```
+
+## 使用
 
 ### 命令
 
-启动exe文件后，你可以在命令窗口中输入`help`来查看命令及其说明。
+启动可执行文件或脚本后，在命令窗口中输入 `help` 查看可用命令。
 
 ```
-    Command[<args>]        :           Usage
-    list/ls                :           List installed apps
-    status/st              :           Show status and check for new app versions
-    update/up              :           Update all apps
-    config/cf              :           Open config file to add an app or modify other settings
-    exit/et                :           Exit the shell
+Command[<args>]        : Usage
+list/ls                : 列出已安装的应用
+status/st              : 查看状态并检查新版本
+update/up              : 更新所有应用
+config/cf              : 打开配置文件以添加应用或修改设置
+exit/et                : 退出命令行
 ```
 
+### 配置 `config.yaml`
 
-### 如何配置`config.yaml`文件
-
-一个最简单的`config.yaml`文件是这样的。
+最小化的 `config.yaml` 示例：
 
 ```yaml
 path: download
@@ -74,48 +82,42 @@ proxy:
 repos:
   - author: ruiyangzhou01
     name: Liquid
-    tag: 
+    tag:
     key: Liquid.zip
-    target: 
+    target:
     setting: { decompress: auto, clean: true }
 ```
 
-#### 一级参数
+#### 顶层字段
 
-##### 参数
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `path` | `str` | - | 未指定 `target` 时使用的默认存储路径 |
+| `proxy` | `dict` | - | 可选的 HTTP/HTTPS 代理设置 |
+| `repos` | `list` | - | 需要管理的仓库列表 |
 
-| 参数   | 数据类型 | 默认值 | 说明                                             |
-| ------ | -------- | ------ | ------------------------------------------------ |
-| `path` | 字符串   | -      | 默认储存路径，未指定target时自动存储到path路径下 |
-| `proxy` | 字典   | -      | 代理信息 |
-| `repos` | 字典   | -      | 存储库信息 |
+#### `repos` 条目
 
-#### `repos`存储库信息
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `author` | `str` | - | 仓库所有者 |
+| `name` | `str` | - | 仓库名称 |
+| `tag` | `str` | - | 当前发行版标签；留空则下载最新版本 |
+| `key` | `str` | `"all"` | 要下载的资源名称（`all` 或留空表示全部资源） |
+| `target` | `str` | `path` | 下载目标路径 |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | 解压设置 |
 
-##### 参数
+#### `setting` 字段
 
-| 参数         | 数据类型 | 默认值 | 说明       |
-| ------------ | -------- | ------ | ---------- |
-| `author` | 字符串   | -      | 存储库所有者 |
-| `name` | 字符串   | -      | 存储库名称 |
-| `tag` | 字符串   | -                                   | 发行版的标签 |
-| `key` | 字符串   | "all"      | 要下载的文件名 |
-| `target` | 字符串   | path      | 下载文件的路径 |
-| `setting` | 字典   | { decompress: auto, clean: true }      | 解压设置 |
-
-#### `setting`设置
-
-##### 参数
-
-| 参数         | 数据类型 | 默认值 | 说明       |
-| ------------ | -------- | ------ | ---------- |
-| `decompress` | 字符串   | -      | 解压方式，`"auto"`表示自动解压，其他非空字符串表示安装在同名目录下，放空则解压到`file_name + '_files'`目录下 |
-| `clean` | 字符串   | true      | true表示解压完成后自动清理压缩文件 |
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `decompress` | `str` | - | `auto` 表示解压到归档所在目录，非空值表示解压到指定文件夹，空值解压到 `<file_name>_files` |
+| `clean` | `bool` | `true` | 解压后自动删除归档文件 |
 
 ## 路线图
 
-- 基于WinUI3的GUI客户端即将问世。
-- 支持更多的功能和更多的配置方式。
+- 计划推出基于 WinUI3 的 GUI 客户端。
+- 计划支持更多功能与配置选项。
 
 ## 许可证
 
