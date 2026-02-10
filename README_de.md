@@ -1,7 +1,7 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box" />
     <img alt="Python" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
@@ -16,7 +16,7 @@ Latest Release ist ein Kommandozeilen-Tool in Python, das die neuesten GitHub-Re
 - Verwendet die GitHub-Releases-API, um den gespeicherten Tag mit dem neuesten Release zu vergleichen
 - Lädt alle Assets oder ein einzelnes Asset mit einem passenden Schlüsselwort herunter
 - Aktualisiert `config.yaml` nach dem Download mit dem neuesten Tag
-- Optionale Entpackung von `.gz`, `.tar`, `.zip` und `.rar` inklusive optionaler Bereinigung
+- Automatisches Entpacken von `.gz`, `.tar`, `.zip` und `.rar`-Archiven nach dem Download sowie anschließende Bereinigung (derzeit ohne abschaltbare Konfiguration)
 - Optionale HTTP/HTTPS-Proxys für API-Aufrufe und Downloads
 - `config.yaml` wird bei jedem Befehl neu geladen, sodass Änderungen sofort greifen
 
@@ -71,10 +71,10 @@ Starte die ausführbare Datei oder das Skript. Wenn `config.yaml` fehlt, wird im
 
 ```
 Command[<args>]        : Usage
-list/ls                : Konfigurierte Repositories und gespeicherte Tags auflisten
-status/st              : Status anzeigen und mit dem neuesten Release vergleichen
-update/up              : Aktuelle Release-Assets für alle Repositories herunterladen
-config/cf              : config.yaml in VS Code oder Notepad öffnen
+list/ls                : Installierte Apps auflisten
+status/st              : Status anzeigen und neue App-Versionen prüfen
+update/up              : Alle Apps aktualisieren
+config/cf              : Konfigurationsdatei öffnen, um Apps hinzuzufügen oder Einstellungen zu ändern
 exit/et                : Die Shell beenden
 ```
 
@@ -113,14 +113,14 @@ repos:
 | `tag` | `str` | - | Zuletzt heruntergeladener Release-Tag; leer lassen, um das neueste Release zu laden |
 | `key` | `str` | `"all"` | Asset-Filter (`all` oder leer bedeutet alle Assets; ansonsten wird die erste Datei mit dem Schlüsselwort geladen) |
 | `target` | `str` | `path` | Zielpfad für Downloads; leer lassen, um `path` zu verwenden |
-| `setting` | `dict` | `{ decompress: auto, clean: true }` | Entpackeinstellungen (gilt für `.gz`, `.tar`, `.zip`, `.rar`) |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | Entpackeinstellungen (wird immer für `.gz`, `.tar`, `.zip`, `.rar` angewendet) |
 
 #### `setting`-Felder
 
 | Parameter | Typ | Standard | Beschreibung |
 | --- | --- | --- | --- |
 | `decompress` | `str` | - | `auto` entpackt neben dem Archiv, ein nicht leerer Wert entpackt in diesen Ordner, ein leerer Wert in `<file_name>_files` |
-| `clean` | `bool` | `true` | Archiv nach dem Entpacken löschen |
+| `clean` | `bool` | `true` | Archiv nach dem Entpacken löschen (aktuell immer aktiviert) |
 
 Nicht-Archive bleiben unverändert, ohne Entpacken.
 

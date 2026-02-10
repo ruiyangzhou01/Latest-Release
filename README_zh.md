@@ -1,7 +1,7 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box" />
     <img alt="Python" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
@@ -16,7 +16,7 @@ Latest Release 是一个命令行 Python 工具，会检查多个仓库的最新
 - 使用 GitHub Releases API 比较已记录的标签与最新版本
 - 可下载全部资源或匹配关键字的单个资源
 - 下载后自动更新 `config.yaml` 中的最新标签
-- 可选自动解压 `.gz`、`.tar`、`.zip`、`.rar`，并可在完成后清理归档
+- 下载 `.gz`、`.tar`、`.zip`、`.rar` 归档后会自动解压，并清理归档文件（目前无法通过配置关闭）
 - 支持为 API 调用和下载配置 HTTP/HTTPS 代理
 - 每次命令都会重新读取 `config.yaml`，修改后立即生效
 
@@ -71,10 +71,10 @@ Latest Release 是一个命令行 Python 工具，会检查多个仓库的最新
 
 ```
 Command[<args>]        : Usage
-list/ls                : 列出已配置的仓库与标签
-status/st              : 显示状态并与最新版本比较
-update/up              : 下载所有仓库的最新 Release 资源
-config/cf              : 用 VS Code 或记事本打开 config.yaml
+list/ls                : 列出已安装应用
+status/st              : 显示状态并检查应用新版本
+update/up              : 更新所有应用
+config/cf              : 打开配置文件以添加应用或修改其他设置
 exit/et                : 退出命令行
 ```
 
@@ -113,14 +113,14 @@ repos:
 | `tag` | `str` | - | 上次下载的 release 标签；留空则下载最新版本 |
 | `key` | `str` | `"all"` | 资源名称过滤（`all` 或空表示全部资源；否则下载文件名包含该关键字的第一个资源） |
 | `target` | `str` | `path` | 下载目标路径；留空使用 `path` |
-| `setting` | `dict` | `{ decompress: auto, clean: true }` | 解压设置（仅对 `.gz`、`.tar`、`.zip`、`.rar` 生效） |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | 解压设置（对 `.gz`、`.tar`、`.zip`、`.rar` 会始终执行） |
 
 #### `setting` 字段
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `decompress` | `str` | - | `auto` 表示解压到归档所在目录，非空值表示解压到指定文件夹，空值解压到 `<file_name>_files` |
-| `clean` | `bool` | `true` | 解压后删除归档文件 |
+| `clean` | `bool` | `true` | 解压后删除归档文件（当前总是被视为开启） |
 
 非归档资源会保持原样，不会解压。
 

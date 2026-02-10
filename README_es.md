@@ -1,7 +1,7 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box" />
     <img alt="Python" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
@@ -16,7 +16,7 @@ Latest Release es una herramienta de línea de comandos en Python que consulta l
 - Usa la API de GitHub Releases para comparar la etiqueta guardada con la última versión
 - Descarga todos los recursos o un único recurso que coincida con una palabra clave
 - Actualiza `config.yaml` con la etiqueta más reciente después de descargar
-- Extracción opcional de `.gz`, `.tar`, `.zip` y `.rar` con limpieza opcional
+- Extracción automática de archivos `.gz`, `.tar`, `.zip` y `.rar` con limpieza automática de los archivos originales (actualmente no se puede desactivar por configuración)
 - Proxy HTTP/HTTPS opcional para llamadas a la API y descargas
 - `config.yaml` se recarga en cada comando para que los cambios surtan efecto de inmediato
 
@@ -71,10 +71,10 @@ Inicia el ejecutable o el script. Si `config.yaml` no existe, se crea una planti
 
 ```
 Command[<args>]        : Usage
-list/ls                : Listar repositorios configurados y etiquetas guardadas
-status/st              : Mostrar estado y comparar con la última release
-update/up              : Descargar recursos de la última release para todos los repositorios
-config/cf              : Abrir config.yaml en VS Code o Notepad
+list/ls                : Listar aplicaciones instaladas
+status/st              : Mostrar estado y comprobar nuevas versiones de las aplicaciones
+update/up              : Actualizar todas las aplicaciones
+config/cf              : Abrir el archivo de configuración para añadir una aplicación o modificar ajustes
 exit/et                : Salir de la consola
 ```
 
@@ -113,14 +113,14 @@ repos:
 | `tag` | `str` | - | Etiqueta de la última release descargada; déjalo vacío para descargar la última versión |
 | `key` | `str` | `"all"` | Filtro de recursos (`all` o vacío descarga todos; si no, se descarga el primer archivo que contenga la clave) |
 | `target` | `str` | `path` | Ruta de destino para las descargas; déjalo vacío para usar `path` |
-| `setting` | `dict` | `{ decompress: auto, clean: true }` | Ajustes de extracción (aplica a `.gz`, `.tar`, `.zip`, `.rar`) |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | Ajustes de extracción (siempre se aplican a `.gz`, `.tar`, `.zip`, `.rar`) |
 
 #### Campos `setting`
 
 | Parámetro | Tipo | Valor predeterminado | Descripción |
 | --- | --- | --- | --- |
 | `decompress` | `str` | - | `auto` extrae junto al archivo, un valor no vacío extrae en esa carpeta, un valor vacío extrae en `<file_name>_files` |
-| `clean` | `bool` | `true` | Elimina el archivo después de extraer |
+| `clean` | `bool` | `true` | Elimina el archivo después de extraer (actualmente siempre está activado) |
 
 Los recursos que no son archivos comprimidos se dejan tal cual, sin extraer.
 

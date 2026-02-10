@@ -1,7 +1,7 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box" />
     <img alt="Python" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
@@ -16,7 +16,7 @@ Latest Release is a command-line Python tool that checks the latest GitHub relea
 - Uses the GitHub Releases API to compare the stored tag with the latest release
 - Downloads all assets or a single asset matching a keyword
 - Updates `config.yaml` with the newest tag after downloading
-- Optional archive extraction for `.gz`, `.tar`, `.zip`, and `.rar` files, with optional cleanup
+- Automatically extracts `.gz`, `.tar`, `.zip`, and `.rar` archives and deletes the downloaded archives (no config switch to disable extraction/cleanup)
 - Optional HTTP/HTTPS proxy for API calls and downloads
 - Reloads `config.yaml` on every command so edits take effect immediately
 
@@ -71,10 +71,10 @@ Start the executable or script. If `config.yaml` does not exist, a template file
 
 ```
 Command[<args>]        : Usage
-list/ls                : List configured repositories and stored tags
-status/st              : Show status and compare against the latest release
-update/up              : Download latest release assets for all repositories
-config/cf              : Open config.yaml in VS Code or Notepad
+list/ls                : List installed apps
+status/st              : Show status and check for new app versions
+update/up              : Update all apps
+config/cf              : Open config file to add an app or modify other settings
 exit/et                : Exit the shell
 ```
 
@@ -113,14 +113,14 @@ repos:
 | `tag` | `str` | - | Last downloaded release tag; leave empty to download the latest release |
 | `key` | `str` | `"all"` | Asset name filter (`all` or empty means all assets; otherwise the first filename containing the key is downloaded) |
 | `target` | `str` | `path` | Download destination path; leave empty to use `path` |
-| `setting` | `dict` | `{ decompress: auto, clean: true }` | Archive extraction settings (applies to `.gz`, `.tar`, `.zip`, `.rar`) |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | Archive extraction settings (always applied for `.gz`, `.tar`, `.zip`, `.rar`) |
 
 #### `setting` fields
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | `decompress` | `str` | - | `auto` extracts next to the archive, a non-empty value extracts to that folder, and an empty value extracts to `<file_name>_files` |
-| `clean` | `bool` | `true` | Remove the archive after extraction |
+| `clean` | `bool` | `true` | Remove the archive after extraction (currently always treated as enabled) |
 
 Non-archive assets are left in place without extraction.
 

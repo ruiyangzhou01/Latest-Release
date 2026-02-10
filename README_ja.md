@@ -1,7 +1,7 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box" />
     <img alt="Python" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
@@ -16,7 +16,7 @@ Latest Release は、複数のリポジトリの最新 GitHub Release を確認�
 - GitHub Releases API で保存済みタグと最新リリースを比較
 - すべてのアセット、またはキーワードに一致する単一アセットをダウンロード
 - ダウンロード後に `config.yaml` のタグを最新に更新
-- `.gz`、`.tar`、`.zip`、`.rar` の展開（任意）と後片付け（任意）
+- `.gz`、`.tar`、`.zip`、`.rar` アーカイブの自動展開とダウンロード済みアーカイブの自動削除（現在は設定で無効化不可）
 - API 呼び出しとダウンロード用の HTTP/HTTPS プロキシに対応
 - `config.yaml` は各コマンドで再読み込みされ、変更がすぐ反映される
 
@@ -71,10 +71,10 @@ Python 3 と pip が必要です。
 
 ```
 Command[<args>]        : Usage
-list/ls                : 設定済みリポジトリとタグを一覧表示
-status/st              : 状態を表示し最新リリースと比較
-update/up              : すべてのリポジトリの最新 Release アセットをダウンロード
-config/cf              : config.yaml を VS Code またはメモ帳で開く
+list/ls                : インストール済みアプリを一覧表示
+status/st              : 状態を表示して新しいアプリ版を確認
+update/up              : すべてのアプリを更新
+config/cf              : 設定ファイルを開きアプリ追加や設定変更を行う
 exit/et                : シェルを終了
 ```
 
@@ -113,14 +113,14 @@ repos:
 | `tag` | `str` | - | 前回ダウンロードした release タグ。空欄で最新リリースを取得 |
 | `key` | `str` | `"all"` | アセット名フィルタ（`all` または空欄で全件。指定すると名前にキーが含まれる最初のファイルを取得） |
 | `target` | `str` | `path` | ダウンロード先。空欄なら `path` を使用 |
-| `setting` | `dict` | `{ decompress: auto, clean: true }` | 展開設定（`.gz`、`.tar`、`.zip`、`.rar` に適用） |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | 展開設定（`.gz`、`.tar`、`.zip`、`.rar` に常に適用） |
 
 #### `setting` の項目
 
 | 項目 | 型 | 既定値 | 説明 |
 | --- | --- | --- | --- |
 | `decompress` | `str` | - | `auto` はアーカイブの隣に展開し、空でない値はそのフォルダーに展開、空欄は `<file_name>_files` に展開 |
-| `clean` | `bool` | `true` | 展開後にアーカイブを削除 |
+| `clean` | `bool` | `true` | 展開後にアーカイブを削除（現在は常に有効） |
 
 アーカイブ以外のアセットは展開せずに保存されます。
 

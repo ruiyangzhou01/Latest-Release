@@ -1,7 +1,7 @@
 # Latest Release
 
 <p>
-    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box)" />
+    <img src="https://img.shields.io/github/v/release/ruiyangzhou01/Latest-Release?&color=blue&logo=hack-the-box" />
     <img alt="Python" src="https://img.shields.io/badge/-Python-9f62a5?style=flat&logo=python&logoColor=white" />
 <!--    <img alt="C#" src="https://img.shields.io/badge/-C_Sharp-9f62a5?style=flat&logo=csharp&logoColor=white" />
     <img alt="WinUI_3" src="https://img.shields.io/badge/-WinUI_3-9f62a5?style=flat&logo=windows&logoColor=white" />-->
@@ -16,7 +16,7 @@ Latest Release est un outil en ligne de commande Python qui interroge les derni�
 - Utilise l'API GitHub Releases pour comparer le tag enregistré avec la dernière release
 - Télécharge toutes les ressources ou une ressource unique correspondant à un mot-clé
 - Met à jour `config.yaml` avec le tag le plus récent après le téléchargement
-- Extraction optionnelle des fichiers `.gz`, `.tar`, `.zip` et `.rar`, avec nettoyage optionnel
+- Extrait automatiquement les fichiers `.gz`, `.tar`, `.zip` et `.rar` et nettoie les archives téléchargées (sans option de désactivation)
 - Proxy HTTP/HTTPS facultatif pour les appels API et les téléchargements
 - `config.yaml` est rechargé à chaque commande afin que les modifications soient immédiates
 
@@ -71,10 +71,10 @@ Démarrez l'exécutable ou le script. Si `config.yaml` n'existe pas, un modèle 
 
 ```
 Command[<args>]        : Usage
-list/ls                : Lister les dépôts configurés et les tags enregistrés
-status/st              : Afficher l'état et comparer avec la dernière release
-update/up              : Télécharger les assets de la dernière release pour tous les dépôts
-config/cf              : Ouvrir config.yaml dans VS Code ou Notepad
+list/ls                : Lister les applications installées
+status/st              : Afficher l'état et vérifier les nouvelles versions des applications
+update/up              : Mettre à jour toutes les applications
+config/cf              : Ouvrir le fichier de configuration pour ajouter une application ou modifier les réglages
 exit/et                : Quitter le shell
 ```
 
@@ -113,14 +113,14 @@ repos:
 | `tag` | `str` | - | Tag de la dernière release téléchargée ; laissez vide pour récupérer la dernière release |
 | `key` | `str` | `"all"` | Filtre d'asset (`all` ou vide pour tout télécharger ; sinon le premier fichier contenant la clé est téléchargé) |
 | `target` | `str` | `path` | Chemin de destination des téléchargements ; laissez vide pour utiliser `path` |
-| `setting` | `dict` | `{ decompress: auto, clean: true }` | Paramètres d'extraction (appliqués à `.gz`, `.tar`, `.zip`, `.rar`) |
+| `setting` | `dict` | `{ decompress: auto, clean: true }` | Paramètres d'extraction (toujours appliqués à `.gz`, `.tar`, `.zip`, `.rar`) |
 
 #### Champs `setting`
 
 | Paramètre | Type | Valeur par défaut | Description |
 | --- | --- | --- | --- |
 | `decompress` | `str` | - | `auto` extrait à côté de l'archive, une valeur non vide extrait dans ce dossier, une valeur vide extrait dans `<file_name>_files` |
-| `clean` | `bool` | `true` | Supprime l'archive après extraction |
+| `clean` | `bool` | `true` | Supprime l'archive après extraction (actuellement toujours activé) |
 
 Les ressources non archivées sont conservées telles quelles, sans extraction.
 
